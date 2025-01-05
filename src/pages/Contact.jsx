@@ -1,113 +1,149 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import emailjs from '@emailjs/browser';
+import Fox from '../models/Fox';
+import useAlert from '../hooks/useAlert';
+import Alert from '../components/Alert';
 
 const Contact = () => {
-    const formRef = useRef(null);
-    const [form, setForm] = useState({ name: '', email: '', message: '' });
-    const [isLoading, setIsLoading] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentAnimation, setCurrentAnimation] = useState('idle');
+  const { alert, showAlert, hideAlert } = useAlert();
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value }); 
-    };
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    setCurrentAnimation('walk');
+  };
 
-    const handleFocus = () => { };
-    const handleBlur = () => { };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setCurrentAnimation('hit');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setIsLoading(true);
+    emailjs
+      .send(
+        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          to_name: 'Sahil',
+          from_email: form.email,
+          to_email: 'sahillitt@gmail.com',
+          message: form.message,
+        },
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        setIsLoading(false);
+        showAlert({
+          show: true,
+          text: 'Message sent successfully!',
+          type: 'success',
+        });
+        setForm({ name: '', email: '', message: '' });
+        setCurrentAnimation('hit'); // Keep the Fox running initially
 
-        emailjs
-            .send(
-                import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-                import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-                {
-                    from_name: form.name,
-                    to_name: 'Sahil',
-                    from_email: form.email,
-                    to_email: 'sahillitt@gmail.com',
-                    message: form.message,
-                },
-                import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-            )
-            .then(() => {
-                setIsLoading(false);
-                // TODO: Show success message
-                // TODO: Hide an alert
+        // Stop the Fox and hide the alert after 3000ms
+        setTimeout(() => {
+          setCurrentAnimation('idle'); // Stop the Fox
+          hideAlert(); // Hide the success alert
+        }, 3000);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        showAlert({
+          show: true,
+          text: 'There was an error sending your message. Please try again.',
+          type: 'error',
+        });
+        setCurrentAnimation('idle'); // Stop the Fox on error
+        console.error('EmailJS Error:', error);
+      });
+  };
 
-                setForm({ name: '', email: '', message: ''}); 
-            })
-            .catch((error) => {
-                setIsLoading(false);
-                console.error(error);
-                // TODO: Show error message
-            });
-    };
+  const handleFocus = () => setCurrentAnimation('walk');
+  const handleBlur = () => setCurrentAnimation('idle');
 
-    return (
-        <section className="relative flex lg:flex-row flex-col max-container">
-            <div className="flex-1 min-w-[50%] flex flex-col">
-                <h1 className="head-text">Get in Touch</h1>
+  return (
+    <section className="relative flex lg:flex-row flex-col max-container">
+      <div className="flex-1 min-w-[50%] flex flex-col">
+        <h1 className="head-text">Get in Touch</h1>
 
-                <form
-                    className="w-full flex flex-col gap-7 mt-14"
-                    onSubmit={handleSubmit}
-                >
-                    <label className="text-black-500 font-semibold">
-                        Name
-                        <input
-                            type="text"
-                            name="name" // Ensure the name matches the state key
-                            className="input"
-                            placeholder="John Smith"
-                            required
-                            value={form.name}
-                            onChange={handleChange}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
-                        />
-                    </label>
-                    <label className="text-black-500 font-semibold">
-                        Email
-                        <input
-                            type="email"
-                            name="email" // Ensure the name matches the state key
-                            className="input"
-                            placeholder="johnsmith@gmail.com"
-                            required
-                            value={form.email}
-                            onChange={handleChange}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
-                        />
-                    </label>
-                    <label className="text-black-500 font-semibold">
-                        Your Message
-                        <textarea
-                            name="message" // Ensure the name matches the state key
-                            rows={4} // Corrected property name
-                            className="textarea"
-                            placeholder="Let me know how I can help you!"
-                            required
-                            value={form.message}
-                            onChange={handleChange}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
-                        />
-                    </label>
-                    <button
-                        type="submit"
-                        className="btn"
-                        disabled={isLoading}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                    >
-                        {isLoading ? 'Sending...' : 'Send Message'}
-                    </button>
-                </form>
-            </div>
-        </section>
-    );
+        {/* Alert Display */}
+        <Alert show={alert.show} text={alert.text} type={alert.type} />
+
+        <form className="w-full flex flex-col gap-7 mt-14" onSubmit={handleSubmit}>
+          <label className="text-black-500 font-semibold">
+            Name
+            <input
+              type="text"
+              name="name"
+              className="input"
+              placeholder="John Smith"
+              required
+              value={form.name}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </label>
+          <label className="text-black-500 font-semibold">
+            Email
+            <input
+              type="email"
+              name="email"
+              className="input"
+              placeholder="johnsmith@gmail.com"
+              required
+              value={form.email}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </label>
+          <label className="text-black-500 font-semibold">
+            Your Message
+            <textarea
+              name="message"
+              rows={4}
+              className="textarea"
+              placeholder="Let me know how I can help you!"
+              required
+              value={form.message}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </label>
+          <button type="submit" className="btn" disabled={isLoading}>
+            {isLoading ? 'Sending...' : 'Send Message'}
+          </button>
+        </form>
+      </div>
+      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
+        <Canvas
+          camera={{
+            position: [0, 0, 5],
+            fov: 75,
+            near: 0.1,
+            far: 1000,
+          }}
+        >
+          <ambientLight intensity={0.5} />
+          <directionalLight intensity={2.5} position={[0, 0, 1]} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Fox
+              currentAnimation={currentAnimation}
+              position={[0.5, 0.35, 0]}
+              rotation={[12.6, -0.6, 0]}
+              scale={[0.5, 0.5, 0.5]}
+            />
+          </Suspense>
+        </Canvas>
+      </div>
+    </section>
+  );
 };
 
 export default Contact;
