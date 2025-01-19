@@ -64,9 +64,12 @@ const Island = ({isRotating, setIsRotating, setCurrentStage, ...props}) => {
         if(e.key === 'ArrowLeft') {
             if(!isRotating) setIsRotating(true);
             islandRef.current.rotation.y += 0.01 * Math.PI;
+            rotationSpeed.current = 0.013;
         } else if(e.key === 'ArrowRight') {
             if(!isRotating) setIsRotating(true);
             islandRef.current.rotation.y -= 0.01 * Math.PI;
+            rotationSpeed.current = -0.013;
+
         }
     }
 
@@ -90,7 +93,6 @@ const Island = ({isRotating, setIsRotating, setCurrentStage, ...props}) => {
             const normalizedRotation =
         ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-      // Set the current stage based on the island's orientation
       switch (true) {
         case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
           setCurrentStage(4);

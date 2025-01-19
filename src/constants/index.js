@@ -1,40 +1,24 @@
-import { meta, shopify, starbucks, tesla } from "../assets/images";
+import { meta, shopify, starbucks, tesla, caloriemate, snowballskirmish } from "../assets/images";
 import {
     car,
     contact,
-    css,
+    java,
     estate,
-    express,
     git,
     github,
     html,
-    javascript,
     linkedin,
     mongodb,
-    motion,
-    mui,
-    nextjs,
-    nodejs,
     pricewise,
     react,
-    redux,
-    sass,
     snapgram,
     summiz,
-    tailwindcss,
-    threads,
-    typescript
-} from "../assets/icons";
+    threads} from "../assets/icons";
 
 export const skills = [
     {
-        imageUrl: css,
-        name: "CSS",
-        type: "Frontend",
-    },
-    {
-        imageUrl: express,
-        name: "Express",
+        imageUrl: java,
+        name: "Java",
         type: "Backend",
     },
     {
@@ -53,61 +37,46 @@ export const skills = [
         type: "Frontend",
     },
     {
-        imageUrl: javascript,
-        name: "JavaScript",
-        type: "Frontend",
-    },
-    {
         imageUrl: mongodb,
         name: "MongoDB",
         type: "Database",
     },
     {
-        imageUrl: motion,
-        name: "Motion",
-        type: "Animation",
-    },
-    {
-        imageUrl: mui,
-        name: "Material-UI",
-        type: "Frontend",
-    },
-    {
-        imageUrl: nextjs,
-        name: "Next.js",
-        type: "Frontend",
-    },
-    {
-        imageUrl: nodejs,
-        name: "Node.js",
-        type: "Backend",
-    },
-    {
         imageUrl: react,
         name: "React",
         type: "Frontend",
-    },
-    {
-        imageUrl: redux,
-        name: "Redux",
-        type: "State Management",
-    },
-    {
-        imageUrl: sass,
-        name: "Sass",
-        type: "Frontend",
-    },
-    {
-        imageUrl: tailwindcss,
-        name: "Tailwind CSS",
-        type: "Frontend",
-    },
-    {
-        imageUrl: typescript,
-        name: "TypeScript",
-        type: "Frontend",
     }
 ];
+
+export const classes = [
+    {
+        name: 'CPSC 110 - Computational Thinking',
+        description: 'Learned functional programming principles and recursion.',
+        skills: ['Functional Programming', 'Problem Solving'],
+    },
+    {
+        name: 'CPSC 121 - Discrete Mathematics',
+        description: 'Explored logic, sets, functions, and combinatorics to build a foundation for computer science.',
+        skills: ['Logical Thinking', 'Mathematical Proofs', 'Combinatorics'],
+    },
+    {
+        name: 'CPSC 210 - Software Construction',
+        description: 'Gained skills in Java, object-oriented programming, and design patterns.',
+        skills: ['Java', 'OOP', 'Design Patterns'],
+    },
+    {
+        name: 'CPSC 213 - Computer Systems',
+        description: 'Studied low-level programming concepts and system-level programming.',
+        skills: ['C Programming', 'Assembly Language', 'Systems Programming'],
+    },
+
+    {
+        name: 'STAT 200 - Statistics',
+        description: 'Developed knowledge in probability, data analysis, and statistical methods.',
+        skills: ['Probability', 'Data Analysis', 'Statistical Inference'],
+    },
+];
+
 
 export const experiences = [
     {
@@ -182,47 +151,21 @@ export const socialLinks = [
     }
 ];
 
+
 export const projects = [
     {
-        iconUrl: pricewise,
+        iconUrl: caloriemate,
         theme: 'btn-back-red',
-        name: 'Amazon Price Tracker',
-        description: 'Developed a web application that tracks and notifies users of price changes for products on Amazon, helping users find the best deals.',
-        link: 'https://github.com/adrianhajdin/pricewise',
+        name: 'CalorieMate Calorie Tracker',
+        description: 'A sleek and user-friendly calorie tracker designed to help users log and monitor their daily food intake. The app calculates consumed and remaining calories based on user-defined goals to support a healthy lifestyle.',
+        link: 'https://github.com/slitt9/CalorieMate',
     },
     {
-        iconUrl: threads,
-        theme: 'btn-back-green',
-        name: 'Full Stack Threads Clone',
-        description: 'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
-        link: 'https://github.com/adrianhajdin/threads',
-    },
-    {
-        iconUrl: car,
+        iconUrl: snowballskirmish,
         theme: 'btn-back-blue',
-        name: 'Car Finding App',
-        description: 'Designed and built a mobile app for finding and comparing cars on the market, streamlining the car-buying process.',
-        link: 'https://github.com/adrianhajdin/project_next13_car_showcase',
+        name: 'Snowball Skirmish',
+        description: 'Snowball Skirmish is a fast-paced web game where players engage in exciting snowball fights. The game challenges reflexes and strategy while delivering captivating graphics and engaging gameplay for all ages.',
+        link: 'https://github.com/slitt9/Snowball-Skirmish',
+        liveLink: 'https://crazygames.com/game/snowball-skirmish',
     },
-    {
-        iconUrl: snapgram,
-        theme: 'btn-back-pink',
-        name: 'Full Stack Instagram Clone',
-        description: 'Built a complete clone of Instagram, allowing users to share photos and connect with friends in a familiar social media environment.',
-        link: 'https://github.com/adrianhajdin/social_media_app',
-    },
-    {
-        iconUrl: estate,
-        theme: 'btn-back-black',
-        name: 'Real-Estate Application',
-        description: 'Developed a web application for real estate listings, facilitating property searches and connecting buyers with sellers.',
-        link: 'https://github.com/adrianhajdin/projects_realestate',
-    },
-    {
-        iconUrl: summiz,
-        theme: 'btn-back-yellow',
-        name: 'AI Summarizer Application',
-        description: 'App that leverages AI to automatically generate concise & informative summaries from lengthy text content, or blogs.',
-        link: 'https://github.com/adrianhajdin/project_ai_summarizer',
-    }
 ];

@@ -8,14 +8,17 @@ const Fox = ({ currentAnimation, ...props }) => {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    Object.values(actions).forEach((action) => action.stop())
-
-    
+    Object.values(actions).forEach((action) => action.stop());
+  
     if (actions[currentAnimation]) {
       actions[currentAnimation].reset().fadeIn(0.5).play();
-      return () => actions[currentAnimation].fadeOut(0.5).stop();
     }
+  
+    return () => {
+      Object.values(actions).forEach((action) => action.fadeOut(0.5).stop());
+    };
   }, [actions, currentAnimation]);
+  
 
   return (
     <group ref={group} {...props} dispose={null}>

@@ -26,6 +26,7 @@ import arrow from './arrow.svg'
 import contact from './contact.svg'
 import soundon from './soundon.png'
 import soundoff from './soundoff.png'
+import java from './java.svg'
 
 export {
     css,
@@ -33,6 +34,7 @@ export {
     git,
     github,
     html,
+    java,
     javascript,
     mongodb,
     motion,

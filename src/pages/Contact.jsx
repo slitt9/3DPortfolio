@@ -42,13 +42,8 @@ const Contact = () => {
           type: 'success',
         });
         setForm({ name: '', email: '', message: '' });
-        setCurrentAnimation('hit'); // Keep the Fox running initially
-
-        // Stop the Fox and hide the alert after 3000ms
-        setTimeout(() => {
-          setCurrentAnimation('idle'); // Stop the Fox
-          hideAlert(); // Hide the success alert
-        }, 3000);
+        setCurrentAnimation('idle');
+        setTimeout(() => hideAlert(), 3000);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -57,20 +52,16 @@ const Contact = () => {
           text: 'There was an error sending your message. Please try again.',
           type: 'error',
         });
-        setCurrentAnimation('idle'); // Stop the Fox on error
+        setCurrentAnimation('idle');
         console.error('EmailJS Error:', error);
       });
   };
 
-  const handleFocus = () => setCurrentAnimation('walk');
-  const handleBlur = () => setCurrentAnimation('idle');
-
   return (
-    <section className="relative flex lg:flex-row flex-col max-container">
+    <section className="relative flex lg:flex-row flex-col max-container h-[100vh]">
       <div className="flex-1 min-w-[50%] flex flex-col">
         <h1 className="head-text">Get in Touch</h1>
 
-        {/* Alert Display */}
         <Alert show={alert.show} text={alert.text} type={alert.type} />
 
         <form className="w-full flex flex-col gap-7 mt-14" onSubmit={handleSubmit}>
@@ -84,8 +75,6 @@ const Contact = () => {
               required
               value={form.name}
               onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
             />
           </label>
           <label className="text-black-500 font-semibold">
@@ -98,8 +87,6 @@ const Contact = () => {
               required
               value={form.email}
               onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
             />
           </label>
           <label className="text-black-500 font-semibold">
@@ -112,8 +99,6 @@ const Contact = () => {
               required
               value={form.message}
               onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
             />
           </label>
           <button type="submit" className="btn" disabled={isLoading}>

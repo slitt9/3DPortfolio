@@ -2,18 +2,21 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <header className="header">
+    <header className="header flex items-center justify-between px-5 py-3">
       <NavLink
         to="/"
-        className="w-10 h-10 rounded-lg bg-white items-center justify-center flex font-bold shadow-md"
+        className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg transform hover:scale-110 transition-all rounded-lg"
+        style={{ marginLeft: '-10px' }} 
       >
-        <p className="blue-gradient_text">SL</p>
+        <p className="text-white font-bold text-xl">SL</p>
       </NavLink>
       <nav className="flex text-lg gap-7 font-medium">
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            isActive ? 'text-blue-500' : 'text-black'
+            `transition-all duration-300 hover:text-blue-600 ${
+              isActive ? 'text-blue-500 underline' : 'text-black'
+            }`
           }
         >
           About
@@ -21,7 +24,9 @@ const Navbar = () => {
         <NavLink
           to="/projects"
           className={({ isActive }) =>
-            isActive ? 'text-blue-500' : 'text-black'
+            `transition-all duration-300 hover:text-blue-600 ${
+              isActive ? 'text-blue-500 underline' : 'text-black'
+            }`
           }
         >
           Projects
