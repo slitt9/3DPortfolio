@@ -1,69 +1,81 @@
+// Contact.jsx
 import React, { useState, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import emailjs from '@emailjs/browser';
 import Fox from '../models/Fox';
-import useAlert from '../hooks/useAlert';
 import Alert from '../components/Alert';
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState('idle');
-  const { alert, showAlert, hideAlert } = useAlert();
+  const [alert, setAlert] = useState({ show: false, text: '', type: 'success' });
+
+  const showAlert = (options) => {
+    setAlert({ ...alert, ...options });
+  };
+
+  const hideAlert = () => {
+    setAlert({ ...alert, show: false });
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setCurrentAnimation('walk');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setCurrentAnimation('hit');
 
-    fetch('/api/sendEmail', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            showAlert({
-              show: true,
-              text: 'Message sent successfully!',
-              type: 'success',
-            });
-          } else {
-            showAlert({
-              show: true,
-              text: 'There was an error sending your message.',
-              type: 'error',
-            });
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-          setForm({ name: '', email: '', message: '' }); 
-          setCurrentAnimation('idle');
-          setTimeout(() => hideAlert(), 3000);
-        });
-  }; 
+    try {
+      // Initialize EmailJS with your public key
+      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+
+      // Send email directly from the client
+      const response = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+          to_name: 'Sahil',
+          to_email: 'sahillitt@gmail.com',
+        }
+      );
+
+      showAlert({
+        show: true,
+        text: 'Message sent successfully!',
+        type: 'success',
+      });
+      
+      setForm({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      showAlert({
+        show: true,
+        text: 'Failed to send message. Please try again.',
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+      setCurrentAnimation('idle');
+      setTimeout(hideAlert, 3000);
+    }
+  };
 
   return (
     <section className="relative flex lg:flex-row flex-col max-container h-[100vh]">
       <div className="flex-1 min-w-[50%] flex flex-col">
         <h1 className="head-text">Get in Touch</h1>
 
-        <Alert show={alert.show} text={alert.text} type={alert.type} />
+        {alert.show && (
+          <Alert text={alert.text} type={alert.type} />
+        )}
 
         <form className="w-full flex flex-col gap-7 mt-14" onSubmit={handleSubmit}>
           <label className="text-black-500 font-semibold">
@@ -76,6 +88,8 @@ const Contact = () => {
               required
               value={form.name}
               onChange={handleChange}
+              onFocus={() => setCurrentAnimation('walk')}
+              onBlur={() => setCurrentAnimation('idle')}
             />
           </label>
           <label className="text-black-500 font-semibold">
@@ -88,6 +102,8 @@ const Contact = () => {
               required
               value={form.email}
               onChange={handleChange}
+              onFocus={() => setCurrentAnimation('walk')}
+              onBlur={() => setCurrentAnimation('idle')}
             />
           </label>
           <label className="text-black-500 font-semibold">
@@ -100,13 +116,20 @@ const Contact = () => {
               required
               value={form.message}
               onChange={handleChange}
+              onFocus={() => setCurrentAnimation('walk')}
+              onBlur={() => setCurrentAnimation('idle')}
             />
           </label>
-          <button type="submit" className="btn" disabled={isLoading}>
+          <button
+            type="submit"
+            className="btn disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isLoading}
+          >
             {isLoading ? 'Sending...' : 'Send Message'}
           </button>
         </form>
       </div>
+
       <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
         <Canvas
           camera={{
