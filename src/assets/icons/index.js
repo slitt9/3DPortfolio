@@ -27,14 +27,18 @@ import contact from './contact.svg'
 import soundon from './soundon.png'
 import soundoff from './soundoff.png'
 import java from './java.svg'
+import cplusplus from './cplusplus.svg'
+import asm from './asm.svg'
 
 export {
     css,
     express,
-    git,
+    git,    
     github,
     html,
     java,
+    cplusplus,
+    asm,
     javascript,
     mongodb,
     motion,
