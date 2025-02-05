@@ -22,41 +22,41 @@ const Contact = () => {
     setIsLoading(true);
     setCurrentAnimation('hit');
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: 'Sahil',
-          from_email: form.email,
-          to_email: 'sahillitt@gmail.com',
-          message: form.message,
-        },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(() => {
-        setIsLoading(false);
-        showAlert({
-          show: true,
-          text: 'Message sent successfully!',
-          type: 'success',
-        });
-        setForm({ name: '', email: '', message: '' });
-        setCurrentAnimation('idle');
-        setTimeout(() => hideAlert(), 3000);
+    fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message
+        }),
       })
-      .catch((error) => {
-        setIsLoading(false);
-        showAlert({
-          show: true,
-          text: 'There was an error sending your message. Please try again.',
-          type: 'error',
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            showAlert({
+              show: true,
+              text: 'Message sent successfully!',
+              type: 'success',
+            });
+          } else {
+            showAlert({
+              show: true,
+              text: 'There was an error sending your message.',
+              type: 'error',
+            });
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+          setForm({ name: '', email: '', message: '' }); 
+          setCurrentAnimation('idle');
+          setTimeout(() => hideAlert(), 3000);
         });
-        setCurrentAnimation('idle');
-        console.error('EmailJS Error:', error);
-      });
-  };
+  }; 
 
   return (
     <section className="relative flex lg:flex-row flex-col max-container h-[100vh]">
