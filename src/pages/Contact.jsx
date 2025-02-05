@@ -11,9 +11,8 @@ const Contact = () => {
   const [currentAnimation, setCurrentAnimation] = useState('idle');
   const [alert, setAlert] = useState({ show: false, text: '', type: 'success' });
 
-
   useEffect(() => {
-    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+    emailjs.init(import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY);
   }, []);
 
   const showAlert = (options) => {
@@ -36,8 +35,8 @@ const Contact = () => {
 
     try {
       const response = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         {
           from_name: form.name,
           from_email: form.email,
