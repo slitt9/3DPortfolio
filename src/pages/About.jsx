@@ -1,6 +1,6 @@
 import React from 'react';
 import { skills } from '../constants';
-import CTA from '../components/cta';
+import CTA from '../components/CTA';
 import ubcLogo from '../assets/icons/ubc.png';
 import { classes } from '../constants';
 

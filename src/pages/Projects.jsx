@@ -1,7 +1,7 @@
 import React from 'react';
 import { projects } from '../constants';
 import arrow from '../assets/icons/arrow.svg';
-import CTA from '../components/cta';
+import CTA from '../components/CTA';
 
 const Projects = () => {
     return (
