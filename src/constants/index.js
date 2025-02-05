@@ -13,7 +13,9 @@ import {
     react,
     snapgram,
     summiz,
-    threads} from "../assets/icons";
+    threads,
+    cplusplus,
+    asm } from "../assets/icons";
 
 export const skills = [
     {
@@ -45,6 +47,16 @@ export const skills = [
         imageUrl: react,
         name: "React",
         type: "Frontend",
+    },
+    {
+        imageUrl: cplusplus,
+        name: "C++",
+        type: "Backend",
+    },
+    {
+        imageUrl: asm,
+        name: "Assembly",
+        type: "Backend",
     }
 ];
 
@@ -60,21 +72,30 @@ export const classes = [
         skills: ['Logical Thinking', 'Mathematical Proofs', 'Combinatorics'],
     },
     {
-        name: 'CPSC 210 - Software Construction',
-        description: 'Gained skills in Java, object-oriented programming, and design patterns.',
-        skills: ['Java', 'OOP', 'Design Patterns'],
+        "name": "CPSC 210 - Software Construction",
+        "description": "Gained skills in Java, object-oriented programming, and design patterns.",
+        "skills": ["Java", "OOP", "Design Patterns"]
     },
     {
-        name: 'CPSC 213 - Computer Systems',
-        description: 'Studied low-level programming concepts and system-level programming.',
-        skills: ['C Programming', 'Assembly Language', 'Systems Programming'],
+        "name": "CPSC 213 - Computer Systems",
+        "description": "Gained hands-on experience with low-level programming, system architecture, and memory management.",
+        "skills": ["C Programming", "Assembly Language", "Systems Programming"]
     },
-
     {
-        name: 'STAT 200 - Statistics',
-        description: 'Developed knowledge in probability, data analysis, and statistical methods.',
-        skills: ['Probability', 'Data Analysis', 'Statistical Inference'],
+        "name": "CPSC 221 - Basic Data Structures and Algorithms",
+        "description": "Developed strong problem-solving skills by implementing and analyzing fundamental data structures and algorithms.",
+        "skills": ["Data Structures", "Algorithm Analysis", "C++"]
     },
+    {
+        "name": "STAT 200 - Statistics",
+        "description": "Developed knowledge in probability, data analysis, and statistical methods.",
+        "skills": ["Probability", "Data Analysis", "Statistical Inference"]
+    },
+    {
+        "name": "STAT 251 - Applied Statistics",
+        "description": "Learned statistical modeling, regression analysis, and data-driven decision making.",
+        "skills": ["Regression Analysis", "Statistical Modeling", "Data Visualization"]
+    }
 ];
 
 
