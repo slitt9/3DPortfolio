@@ -1,5 +1,4 @@
-// Contact.jsx
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import emailjs from '@emailjs/browser';
@@ -11,6 +10,11 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState('idle');
   const [alert, setAlert] = useState({ show: false, text: '', type: 'success' });
+
+
+  useEffect(() => {
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+  }, []);
 
   const showAlert = (options) => {
     setAlert({ ...alert, ...options });
@@ -31,10 +35,6 @@ const Contact = () => {
     setCurrentAnimation('hit');
 
     try {
-      // Initialize EmailJS with your public key
-      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
-
-      // Send email directly from the client
       const response = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
