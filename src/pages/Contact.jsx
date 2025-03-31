@@ -5,6 +5,7 @@ import emailjs from '@emailjs/browser';
 import Fox from '../models/Fox';
 import Alert from '../components/Alert';
 
+
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
@@ -18,10 +19,11 @@ const Contact = () => {
   const showAlert = (options) => {
     setAlert({ ...alert, ...options });
   };
-
+  
   const hideAlert = () => {
     setAlert({ ...alert, show: false });
   };
+  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -32,6 +34,8 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
     setCurrentAnimation('hit');
+
+    await new Promise((res) => setTimeout(res, 1500));
 
     try {
       const response = await emailjs.send(
@@ -45,6 +49,7 @@ const Contact = () => {
           to_email: 'sahillitt@gmail.com',
         }
       );
+      
 
       showAlert({
         show: true,
@@ -72,9 +77,8 @@ const Contact = () => {
       <div className="flex-1 min-w-[50%] flex flex-col">
         <h1 className="head-text">Get in Touch</h1>
 
-        {alert.show && (
-          <Alert text={alert.text} type={alert.type} />
-        )}
+        <Alert show={alert.show} text={alert.text} type={alert.type} />
+
 
         <form className="w-full flex flex-col gap-7 mt-14" onSubmit={handleSubmit}>
           <label className="text-black-500 font-semibold">
