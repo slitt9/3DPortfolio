@@ -18,7 +18,7 @@ const renderContent = {
         <h1 className="sm:text-xl sm:leading-snug text-center neo-brutalism-blue py-4 px-8 text-white mx-5">
             Hi, I am <span className="font-semibold">Sahil Litt</span> 👋
             <br />
-            A Computer Science student at UBC, striving to make a mark in the tech world.
+            Currently focusing on studies centered around Computer Science at UBC, I'm striving to make a mark in the tech world.
         </h1>
     ),
     2: (

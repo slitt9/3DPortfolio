@@ -14,7 +14,7 @@ const About = () => {
                 </h1>
                 <div className="mt-5 flex flex-col gap-3 text-slate-500">
                     <p>
-                        A Computer Science student based in Vancouver, interested in Software Development and eager to create innovative solutions.
+                        A student based in Vancouver, interested in Software Development and Artifical Intelligence and eager to create innovative solutions.
                     </p>
                 </div>
                 <div className="py-10 flex flex-col">

@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect, useRef} from 'react';
+ import React, { Suspense, useState, useEffect, useRef} from 'react';
 import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
 import Island from '../models/Island';

@@ -95,6 +95,11 @@ export const classes = [
         "name": "STAT 251 - Applied Statistics",
         "description": "Learned statistical modeling, regression analysis, and data-driven decision making.",
         "skills": ["Regression Analysis", "Statistical Modeling", "Data Visualization"]
+    },
+    {
+        "name": "PHIL 220 - Symbolic Logic",
+        "description": "Learned to translate natural language arguments into formal logic, and evaluate their validity using symbolic methods.",
+        "skills": ["Propositional Logic", "Predicate Logic", "Critical Thinking"]
     }
 ];
 
