@@ -29,6 +29,7 @@ import soundoff from './soundoff.png'
 import java from './java.svg'
 import cplusplus from './cplusplus.svg'
 import asm from './asm.svg'
+import c from './c.svg'
 
 export {
     css,
@@ -61,5 +62,6 @@ export {
     arrow,
     contact,
     soundon,
-    soundoff
+    soundoff,
+    c
 }

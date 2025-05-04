@@ -1,4 +1,4 @@
-import { meta, shopify, starbucks, tesla, caloriemate, snowballskirmish } from "../assets/images";
+import { meta, shopify, starbucks, tesla, caloriemate, snowballskirmish, sikhyapunjab} from "../assets/images";
 import {
     car,
     contact,
@@ -15,7 +15,8 @@ import {
     summiz,
     threads,
     cplusplus,
-    asm } from "../assets/icons";
+    asm,
+    c       } from "../assets/icons";
 
 export const skills = [
     {
@@ -57,7 +58,13 @@ export const skills = [
         imageUrl: asm,
         name: "Assembly",
         type: "Backend",
+    },
+    {
+        imageUrl: c,
+        name: "C",
+        type: "Backend",
     }
+
 ];
 
 export const classes = [
@@ -193,5 +200,13 @@ export const projects = [
         description: 'Snowball Skirmish is a fast-paced web game where players engage in exciting snowball fights. The game challenges reflexes and strategy while delivering captivating graphics and engaging gameplay for all ages.',
         link: 'https://github.com/slitt9/Snowball-Skirmish',
         liveLink: 'https://crazygames.com/game/snowball-skirmish',
+    },
+    {
+        iconUrl: sikhyapunjab,
+        theme: 'btn-back-yellow',
+        name: 'Sikhya Punjab',
+        description: 'An interactive educational web app designed to teach the Punjabi language and culture through speaking, reading, and listening lessons, games, and historical content. Built with React, Vite, and styled-components.',
+        link: 'https://github.com/randeepsidhu1/SikhyaPunjab',
+        liveLink: 'https://sikhyapunjab.vercel.app',
     },
 ];

@@ -4,6 +4,7 @@ import starbucks from './starbucks.png';
 import tesla from './tesla.png';
 import caloriemate from './caloriemate.png'; 
 import snowballskirmish from './snowballskirmish.png';
+import sikhyapunjab from './sikhyapunjab.png';
 
 export {
     meta,
@@ -12,4 +13,5 @@ export {
     tesla,
     caloriemate, 
     snowballskirmish, 
+    sikhyapunjab
 };
